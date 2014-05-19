@@ -1,0 +1,50 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{dirtree}
+\usepackage[ngerman]{babel}
+\usepackage{listings, color}
+\usepackage{graphicx}
+
+\graphicspath{ {./images/} }
+
+
+\lstdefinestyle{test}
+{
+    basicstyle=\ttfamily
+}
+\lstdefinestyle{Bash}
+{
+    language=bash,
+    frame=lrtb,
+    basicstyle=\ttfamily,
+    showstringspaces=false,
+    keywordstyle=\color{blue}
+}
+\lstdefinestyle{gdisk}
+{
+    basicstyle=\ttfamily,
+    showstringspaces=false,
+    commentstyle=\color{red},
+    keywordstyle=\color{blue}
+}
+
+\author{Sebastian Knauer}
+\title{Installation und Konfiguration von Arch Linux}
+\begin{document}
+\maketitle
+\includegraphics[scale=0.75]{arch-logo.pdf}
+
+\section{Einleitung}
+\label{sec:einleitung}
+\input{einleitung}
+
+\section{Basissystem}
+\label{sec:base-system}
+\input{basesystem}
+    
+\section{Programme und Konfiguration}
+\label{sec:programme}
+\input{programme}
+
+\end{document}

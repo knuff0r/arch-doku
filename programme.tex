@@ -1,0 +1,219 @@
+\graphicspath{ {programme/images/} }
+
+\input{programme/editor}
+\input{programme/terminal}
+\input{programme/wm}
+\input{programme/fm}
+\input{programme/browser}
+
+
+\subsection{AUR-Helper}
+Pacaur \textbf{pacaur} muss aus dem AUR heruntergeladen und selbst gebuildet werden.
+Zunächst jedoch muss \textbf{expac} aus den official repositories installiert werden.
+\begin{lstlisting}[style=Bash]
+# pacman -S expac
+\end{lstlisting}
+Danach muss \textbf{cower} aus dem AUR heruntergeladen und installiert werden:
+\begin{lstlisting}[style=Bash]
+$ wget https://aur.archlinux.org/packages/co/cower/cower.tar.gz
+$ tar -xf cower.tar.gz
+$ cd cower
+$ makepkg
+# pacman -U cower-$version-$arch.pkg.tar.xz
+\end{lstlisting}
+Schließlich muss pacaur selbst aus dem AUR heruntergeladen und installiert werden:
+\begin{lstlisting}[style=Bash]
+$ wget https://aur.archlinux.org/packages/pa/pacaur/pacaur.tar.gz
+$ tar -xf pacaur.tar.gz
+$ cd pacaur
+$ makepkg
+# pacman -U pacaur-$version-$arch.pkg.tar.xz
+\end{lstlisting}
+
+\subsection{Backup-tool}
+\begin{tabular}{l|l}
+~ & Rsnapshot \\ \hline
+Paketname & \textbf{rsnapshot} \\ 
+Repository & official repository(community) \\
+Konfigurationsdatei & /etc/rsnapshot.conf \\
+Lizenz & GPL \\
+Besonderheiten & einfach \\
+\end{tabular}
+\\ \\
+
+\subsection{\LaTeX}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.05]{latex-logo.pdf} & \LaTeX \\ \hline
+Paketname & \textbf{texlive-core} \\ 
+Repository & official repository(extra) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL \\
+Besonderheiten & - \\
+\end{tabular}
+\\ \\
+\emph{.sty}-files kommen nach \emph{texmf/tex/latex/local}.
+Mit 
+\begin{lstlisting}[style=Bash, frame=none]
+$ texhash
+$
+\end{lstlisting}
+wird die Latex database aktualisiert.
+\dirtree{%
+    .1 /.
+    .2 texmf.
+    .3 tex.
+    .4 latex.
+    .5 local.
+}
+
+
+\subsection{Music engraver}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.2]{lilypond-logo.png} & Lilypond \\ \hline
+Paketname & \textbf{lilypond} \\ 
+Repository & official repository(community) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL \\
+Besonderheiten & - \\
+\end{tabular}
+\\ \\
+
+\subsection{Password manager}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.75]{keepassx-logo.pdf} & KeePassX \\ \hline
+Paketname & \textbf{keepassx} \\ 
+Repository & official repository(community) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL2 \\
+Besonderheiten & - \\
+\end{tabular}
+\\ \\
+
+\subsection{PDF-Viewer}
+\begin{tabular}{l|l}
+\includegraphics[scale=1]{evince-logo.pdf} & Evince \\ \hline
+Paketname & \textbf{evince} \\ 
+Repository & official repository(extra) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL \\
+Anmerkung & Gute balance zwischen performance und funcionality \\
+\end{tabular}
+\\ \\
+
+\subsection{Printer}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.75]{printer.pdf} & Printer server \\ \hline
+Paketname & \textbf{cups} \\ 
+Repository & official repository(extra) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL \\
+Besonderheiten & Einrichtung und Verwaltung: http://localhost:631 als root \\
+\end{tabular}
+\\ \\
+Für eine gute Auswahl an hochqualitvativen freien Druckertreibern kann Gutenprint \textbf{gutenprint}
+aus den official repositories installiert werden:
+\begin{lstlisting}[style=Bash]
+# pacman -S gutenprint 
+\end{lstlisting}
+Nun muss noch der Service enabled werden:
+\begin{lstlisting}[style=Bash]
+# systemctl enable cups
+\end{lstlisting}
+
+\subsection{E-mail client}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.75]{thunderbird-logo.pdf} & Thunderbird \\ \hline
+Paketname & \textbf{thunderbird} \\ 
+Repository & official repository(extra) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL,MPL \\
+Besonderheiten & Automatische Einrichtung von T-online, Gmail und TU mail \\
+\end{tabular}
+
+\subsection{Musicplayer}
+\begin{tabular}{l|l|l}
+~ & Server & Client \\ \hline
+Paketname & \textbf{mpd} & \textbf{ncmpcpp} \\ 
+Repository & official repository(extra) & official repository(extra) \\
+Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}.mpd/mpd.conf} & - \\
+Lizenz & GPL & GPL \\
+Besonderheiten & schnell & schnell\\
+\end{tabular}
+\\ \\
+MPD Konfiguration:
+\begin{lstlisting}[style=Bash]
+$ mkdir .mpd
+$ cp /usr/share/doc/mpd/mpdconf.example .mpd/mpd.conf
+$ cd .mpd
+$ mkdir  playlists
+$ touch {database,log,pid,state,sticker.sql}
+$ systemctl --user enable mpd
+\end{lstlisting}
+\dirtree{%
+    .1 /.
+    .2 .mpd.
+    .3 playlists.
+    .3 database.
+    .3 log.
+    .3 pid.
+    .3 state.
+    .3 sticker.sql.
+}
+In der \emph{.i3/config} noch die Shortcuts zum abspielen mit ncmpcpp definieren:
+\begin{lstlisting}[style=Bash]
+$ vim .i3/config
+
+...
+bindsym XF86AudioPlay exec ncmpcpp toggle
+bindsym XF86AudioNext exec ncmpcpp next
+bindsym XF86AudioPrev exec ncmpcpp prev
+bindsym XF86AudioStop exec ncmpcpp stop
+
+$
+\end{lstlisting}
+
+\subsection{Archivierungsprogramm}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.25]{xarchiver-logo.png} & Xarchiver \\ \hline
+Paketname & \textbf{xarchiver} \\ 
+Repository & official repository(community) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL \\
+Besonderheiten & - \\
+\end{tabular}
+\\ \\
+Für zusätzliche unterstützung wird benötigt:
+\begin{lstlisting}[style=Bash]
+# pacman -S unzip p7zip 
+\end{lstlisting}
+
+\subsection{Bildbetrachter}
+\begin{tabular}{l|l|l}
+~ & Sxiv & Geeqie \\ \hline
+Paketname & \textbf{sxiv} & \textbf{geeqie} \\ 
+Repository & official repository(community) & official repository(extra) \\
+Konfigurationsdatei & - & - \\
+Lizenz & GPL2 & GPL2 \\
+Besonderheiten & schnell & bequemes browsen \\
+\end{tabular}
+
+\subsection{Spiele}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.25]{steam-logo.pdf} & Steam \\ \hline
+Paketname & \textbf{steam} \\ 
+Repository & official repository(multilib) \\
+Konfigurationsdatei & - \\
+Lizenz & custom \\
+Besonderheiten & - \\
+\end{tabular}
+\\ \\ \\
+\begin{tabular}{l|l}
+\includegraphics[scale=0.25]{minecraft-logo.pdf} & Minecraft \\ \hline
+Paketname & \textbf{minecraft} \\ 
+Repository & arch user repository \\
+Konfigurationsdatei & - \\
+Lizenz & custom \\
+Besonderheiten & - \\
+\end{tabular}
+
+
