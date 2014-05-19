@@ -1,6 +1,6 @@
 \subsection{Android - MTP}
 \begin{tabular}{l|l}
-~ \\ \hline
+~ & jMTPFs \\ \hline
 Paketname & \textbf{jmptfs} \\ 
 Repository & arcvh user repository\\
 Konfigurationsdatei & - \\
@@ -22,3 +22,43 @@ Unmount:
 $ fusermount -u  ~/nexus
 $
 \end{lstlisting}
+
+\subsection{Externer Bildschirm}
+Disable suspend on lid close:
+\begin{lstlisting}[style=Bash]
+# vim /etc/systemd/logind.conf
+------------------------------
+...
+HandleLidSwitch=ignore
+...
+\end{lstlisting}
+\begin{lstlisting}[style=Bash]
+# visudo
+------------------------------
+...
+%users ALL= NOPASSWD: /usr/bin/systemctl suspend
+...
+\end{lstlisting}
+\begin{lstlisting}[style=Bash]
+$ vim .i3/config
+$
+------------------------------
+...
+bindsym XF86Sleep exec systemctl suspend
+...
+\end{lstlisting}
+
+\subsection{Preload}
+\begin{tabular}{l|l}
+~ & preload \\ \hline
+Paketname & \textbf{preload} \\ 
+Repository & arch user repository\\
+Konfigurationsdatei & - \\
+Lizenz & GPL2 \\
+Besonderheiten & - \\
+\end{tabular}
+\\ \\
+\begin{lstlisting}[style=Bash]
+# systemctl enable preload
+\end{lstlisting}
+
