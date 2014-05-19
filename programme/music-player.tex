@@ -1,0 +1,41 @@
+\subsection{Musicplayer}
+\begin{tabular}{l|l|l}
+~ & Server & Client \\ \hline
+Paketname & \textbf{mpd} & \textbf{ncmpcpp} \\ 
+Repository & official repository(extra) & official repository(extra) \\
+Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}.mpd/mpd.conf} & - \\
+Lizenz & GPL & GPL \\
+Besonderheiten & schnell & schnell\\
+\end{tabular}
+\\ \\
+MPD Konfiguration:
+\begin{lstlisting}[style=Bash]
+$ mkdir .mpd
+$ cp /usr/share/doc/mpd/mpdconf.example .mpd/mpd.conf
+$ cd .mpd
+$ mkdir  playlists
+$ touch {database,log,pid,state,sticker.sql}
+$ systemctl --user enable mpd
+\end{lstlisting}
+\dirtree{%
+    .1 /.
+    .2 .mpd.
+    .3 playlists.
+    .3 database.
+    .3 log.
+    .3 pid.
+    .3 state.
+    .3 sticker.sql.
+}
+In der \emph{.i3/config} noch die Shortcuts zum abspielen mit ncmpcpp definieren:
+\begin{lstlisting}[style=Bash]
+$ vim .i3/config
+
+...
+bindsym XF86AudioPlay exec ncmpcpp toggle
+bindsym XF86AudioNext exec ncmpcpp next
+bindsym XF86AudioPrev exec ncmpcpp prev
+bindsym XF86AudioStop exec ncmpcpp stop
+
+$
+\end{lstlisting}

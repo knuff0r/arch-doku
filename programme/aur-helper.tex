@@ -1,0 +1,22 @@
+\subsection{AUR-Helper}
+Pacaur \textbf{pacaur} muss aus dem AUR heruntergeladen und selbst gebuildet werden.
+Zunächst jedoch muss \textbf{expac} aus den official repositories installiert werden.
+\begin{lstlisting}[style=Bash]
+# pacman -S expac
+\end{lstlisting}
+Danach muss \textbf{cower} aus dem AUR heruntergeladen und installiert werden:
+\begin{lstlisting}[style=Bash]
+$ wget https://aur.archlinux.org/packages/co/cower/cower.tar.gz
+$ tar -xf cower.tar.gz
+$ cd cower
+$ makepkg
+# pacman -U cower-$version-$arch.pkg.tar.xz
+\end{lstlisting}
+Schließlich muss pacaur selbst aus dem AUR heruntergeladen und installiert werden:
+\begin{lstlisting}[style=Bash]
+$ wget https://aur.archlinux.org/packages/pa/pacaur/pacaur.tar.gz
+$ tar -xf pacaur.tar.gz
+$ cd pacaur
+$ makepkg
+# pacman -U pacaur-$version-$arch.pkg.tar.xz
+\end{lstlisting}

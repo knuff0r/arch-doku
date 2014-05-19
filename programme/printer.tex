@@ -1,0 +1,19 @@
+\subsection{Printer}
+\begin{tabular}{l|l}
+\includegraphics[scale=0.75]{printer.pdf} & Printer server \\ \hline
+Paketname & \textbf{cups} \\ 
+Repository & official repository(extra) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL \\
+Besonderheiten & Einrichtung und Verwaltung: http://localhost:631 als root \\
+\end{tabular}
+\\ \\
+Für eine gute Auswahl an hochqualitvativen freien Druckertreibern kann Gutenprint \textbf{gutenprint}
+aus den official repositories installiert werden:
+\begin{lstlisting}[style=Bash]
+# pacman -S gutenprint 
+\end{lstlisting}
+Nun muss noch der Service enabled werden:
+\begin{lstlisting}[style=Bash]
+# systemctl enable cups
+\end{lstlisting}
