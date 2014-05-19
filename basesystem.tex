@@ -152,6 +152,14 @@ Bootloader installieren und konfigurieren
 \begin{lstlisting}[style=Bash]
 # pacman -S grub 
 # grub-install /dev/sda 
+\end{lstlisting}
+Falls suspend probleme macht mit graka, Disable dpm:
+\begin{lstlisting}[style=Bash]
+# vi /etc/default/grub
+----------------------
+...
+GRUB_CMDLINE_LINUX_DEFAULT="quiet radeon.dpm=0"
+...
 # grub-mkconfig -o /boot/grub/grub.cfg 
 \end{lstlisting}
 Finish it:
