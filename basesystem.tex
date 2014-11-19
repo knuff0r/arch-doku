@@ -32,9 +32,10 @@ Verfizieren:
 
 \subsection{Partitionierung}
 \label{subsec:partitioning}
-Die Partitionstabelle wird mit dem neuere GPT, anstatt dem veraltenen MBR erstellt.
-Im Folgenden wid davoin ausgegangen, dass die gesamte Festplatte verwendet wird
-und Arch als Single-Boot laufen soll.
+Die Partitionstabelle wird mit dem GPT erstellt.
+Nur root partition und swap(1gb) sowie boot partition(3MB), 
+da wenig speicherplatz.
+
 \begin{lstlisting}[style=Bash]
 # gdisk /dev/sda
 \end{lstlisting}
@@ -45,19 +46,13 @@ p           :Partitionsschema anzeigen
 n           :neue Partition (root-Partition)
 <default>   :Sollte 1 sein
 <default>     
-+15G        :Partition auf 15 GB setzen
-<default>   :8300 (linux file system)
-
-n           :neue Partition (home-Partition)
-<default>   :Sollte 2 sein
-<default>     
-+280G       :Partition auf 280 GB setzen
++110G       :Partition auf 110 GB setzen
 <default>   :8300 (linux file system)
 
 n           :neue Partition (swap-Partition)
 <default>   :Sollte 3 sein
 <default>     
-+3G         :Partition auf 3 GB setzen
++1G         :Partition auf 3 GB setzen
 8200        :swap
 
 n           :neue Partition (boot-Partition)
@@ -65,19 +60,18 @@ n           :neue Partition (boot-Partition)
 -3M         :Partition auf 3MB setzen
 <default>   
 ef02        :Gpt boot
+
+w           :schreiben und speichern
 \end{lstlisting}
 Filesysteme erstellen:
 \begin{lstlisting}[style=Bash]
-# mkfs.ext4 -l arch /dev/sda1
-# mkfs.ext4 -l home /dev/sda2
-# mkswap -l swap /dev/sda3
-# swapon /dev/sda3
+# mkfs.ext4 -L arch /dev/sda1
+# mkswap -L swap /dev/sda2
+# swapon /dev/sda2
 \end{lstlisting}
 Partitionen mounten:
 \begin{lstlisting}[style=Bash]
 # mount /dev/sda1 /mnt 
-# mkdir /mnt/home 
-# mount /dev/sda2 /mnt/home
 \end{lstlisting}
 
 \subsection{Installation}
@@ -85,21 +79,6 @@ Partitionen mounten:
 \begin{lstlisting}[style=Bash]
 # pacstrap /mnt base base-devel 
 # genfstab -Up /mnt > /mnt/etc/fstab 
-\end{lstlisting}
-Verifiziere Filesystemtable:
-\begin{lstlisting}[style=Bash]
-# cat /mnt/etc/fstab
-\end{lstlisting}
-Sollte dann so aussehen:
-\begin{lstlisting}[style=Bash]
-# /dev/sda1 LABEL=arch
-UUID=c6851a0a-63f0-4280-9797-ce349ceac5a6   /           ext4        rw,relatime,data=ordered    0 1
-
-# /dev/sda2 LABEL=home
-UUID=9e1e29c1-c5c8-443f-bcf6-24471b533ab6   /home       ext4        rw,relatime,data=ordered    0 2
-
-# /dev/sda3 LABEL=swap
-UUID=609f8dd5-69c1-45d6-b05f-fb2862ce60b2   none        swap        defaults    0 0
 \end{lstlisting}
 
 \subsection{Koniguration}
@@ -113,30 +92,23 @@ UUID=609f8dd5-69c1-45d6-b05f-fb2862ce60b2   none        swap        defaults    
 # echo KEYMAP=de-latin1 > /etc/vconsole.conf
 # ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 \end{lstlisting}
-Bearbeite locale.gen
+Bearbeite /etc/locale.gen
 \begin{lstlisting}[style=Bash]
-# vi /etc/locale.gen
-
-#de_DE.UTF-8 UTF-8
-#de_DE ISO-8859-1
-#de_DE@euro ISO-8859-15
-
+...
 de_DE.UTF-8 UTF-8
 de_DE ISO-8859-1
 de_DE@euro ISO-8859-15
+...
 \end{lstlisting}
 \begin{lstlisting}[style=Bash]
 # locale-gen 
 \end{lstlisting}
-Bearbeite pacman.conf
+Uncomment multilib in /etc/pacman.conf
 \begin{lstlisting}[style=Bash]
-# vi /etc/pacman.conf
-
-#[multilib]
-#Include = /etc/pacman.d/mirrorlist
-
+...
 [multilib]
 Include = /etc/pacman.d/mirrorlist
+...
 \end{lstlisting}
 Kernel erstellen
 \begin{lstlisting}[style=Bash]
@@ -151,10 +123,8 @@ Bootloader installieren und konfigurieren
 # pacman -S grub 
 # grub-install /dev/sda 
 \end{lstlisting}
-Falls suspend probleme macht mit graka, Disable dpm:
+DPM Dekativieren in /etc/default/grub, da es sehr langsam ist:
 \begin{lstlisting}[style=Bash]
-# vi /etc/default/grub
-----------------------
 ...
 GRUB_CMDLINE_LINUX_DEFAULT="quiet radeon.dpm=0"
 ...
@@ -169,33 +139,37 @@ Finish it:
 
 \section{Post-Install Konfiguration}
 \begin{lstlisting}[style=Bash]
-# systemctl enable dhcpcd.service 
+# systemctl enable dhcpcd
+\end{lstlisting}
+\begin{lstlisting}[style=Bash]
 # useradd -m -g users -s /bin/bash sebastian 
 # passwd sebastian
+# usermod -aG wheel sebastian
 \end{lstlisting}
-Edit /etc/sudoers:
+Uncomment wheel group in /etc/sudoers with nopasswd:
 \begin{lstlisting}[style=Bash]
 # visudo 
+...
+%wheel ALL=(ALL) NOPASSWD: ALL
+...
 
-#%wheel ALL=(ALL) ALL
-
-%wheel ALL=(ALL) ALL
 \end{lstlisting}
 Uhrzeit:
 \begin{lstlisting}[style=Bash]
 # pacman -S ntp 
 # vi /etc/ntp.conf
 
+server time.zih.tu-dresden.de
 server de.pool.ntp.org
 
-# systemctl enable ntp 
+# systemctl enable ntpd 
 \end{lstlisting}
-Wundstrasse, TuDresden Mirror:
+Pacman Wundstrasse, TuDresden Mirror in /etc/pacman.d/mirrorlist
 \begin{lstlisting}[style=Bash]
-# vi /etc/pacman.d/mirrorlist
 
 ...
-server = ftp://ftp.wh2.tu-dresden.de/pub/mirrors/archlinux/$repo/os/x86_64
+server = ftp://ftp.wh2.tu-dresden.de/pub/mirrors
+/archlinux/$repo/os/x86_64
 ...
 
 $
@@ -206,8 +180,7 @@ Sound:
 $ alsamixer
 $
 \end{lstlisting}
-'m' drücken um Master Channel zu unmuten:\\
-\includegraphics[width=1\textwidth]{alsamixer.png}
+'m' drücken um Master Channel zu unmuten
 
 \subsection{X11}
 \label{sec:x11}
