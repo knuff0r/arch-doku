@@ -1,18 +1,185 @@
-\graphicspath{ {programme/images/} }
+Alle Pakete befinden sich in den official Repositories und freie Software,
+sofern es nicht explizit vermerkt ist
 
-\input{programme/editor}
-\input{programme/terminal}
-\input{programme/wm}
-\input{programme/fm}
-\input{programme/browser}
-\input{programme/aur-helper}
-\input{programme/latex}
-\input{programme/pdf-viewer}
-\input{programme/backup}
-\input{programme/email}
-\input{programme/archiver}
-\input{programme/pwd-manager}
-\input{programme/printer}
-\input{programme/music-player}
-\input{programme/music-engraver}
-\input{programme/games}
+\subsection{Archivierungsprogramm}
+\begin{tabular}{l|l}
+Paketname & \textbf{tar,unzip} \\ 
+Konfigurationsdatei & - \\
+\end{tabular}
+\\ \\
+
+\subsection{AUR-Helper}
+\textbf{cower}\footnote{bla} muss aus dem AUR heruntergeladen und selbst gebuildet werden.
+\begin{lstlisting}[style=Bash]
+$ wget https://aur.archlinux.org/packages/co/cower/cower.tar.gz
+$ tar -xf cower.tar.gz
+$ cd cower
+$ makepkg
+# pacman -U cower-$version-$arch.pkg.tar.xz
+\end{lstlisting}
+Schließlich muss pacaur selbst aus dem AUR heruntergeladen und installiert werden:
+\begin{lstlisting}[style=Bash]
+$ wget https://aur.archlinux.org/packages/pa/pacaur/pacaur.tar.gz
+$ tar -xf pacaur.tar.gz
+$ cd pacaur
+$ makepkg
+# pacamn -S <dependecies>
+# pacman -U pacaur-$version-$arch.pkg.tar.xz
+\end{lstlisting}
+
+\subsection{Backup-tool}
+\begin{tabular}{l|l}
+Paketname & \textbf{rsnapshot} \\ 
+Konfigurationsdatei & /etc/rsnapshot.conf \\
+\end{tabular}
+Es kann eine Datei *.exclude angelegt werden. Der pfad wird in der Konfigurationsdatei spezifiziert
+
+\subsection{Webbrowser}
+\begin{tabular}{l|l|l}
+Paketname & \textbf{chromium} & \textbf{chromium-pepper-flash} \\ 
+Konfigurationsdatei & - & - \\
+\end{tabular}
+\\
+Folgende plugins sollten installiert werden: adblock, proxflow, ytunblocker
+
+\subsection{cdencode}
+\begin{tabular}{l|l|l}
+Paketname & \textbf{abcde}  \\ 
+Konfigurationsdatei & - & - \\
+\end{tabular}
+\\
+abcde -o flac -Mx
+
+\subsection{Texteditor}
+\begin{tabular}{l|l}
+Paketname & \textbf{vim} \\ 
+Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.vimrc} \\
+\end{tabular}
+\\ \\
+Verzeichnisstruktur:  
+\dirtree{%
+    .1 /.
+    .2 .vim.
+    .3 colors.
+    .3 ftplugin.
+}
+
+\subsection{E-mail client}
+\begin{tabular}{l|l}
+Paketname & \textbf{thunderbird} \\ 
+Konfigurationsdatei & - \\
+\end{tabular}
+
+\subsection{Filemanager}
+\begin{tabular}{l|l}
+Paketname & \textbf{thunar} \\ 
+Konfigurationsdatei & ~ \\
+\end{tabular}
+\\ \\
+
+\subsection{steam}
+\begin{tabular}{l|l}
+Paketname & \textbf{steam} \\ 
+Lizenz & custom \\
+\end{tabular}
+\\ \\ \\
+
+\subsection{Bildbetrachter}
+\begin{tabular}{l|l|l}
+Paketname & \textbf{feh} \\ 
+\end{tabular}
+
+\subsection{\LaTeX}
+\begin{tabular}{l|l}
+Paketname & \textbf{texlive-core} \\ 
+\end{tabular}
+\\ \\
+\emph{.sty}-files kommen nach \emph{texmf/tex/latex/local}.
+Mit 
+\begin{lstlisting}[style=Bash, frame=none]
+$ texhash
+$
+\end{lstlisting}
+wird die Latex database aktualisiert.
+\dirtree{%
+    .1 /.
+    .2 texmf.
+    .3 tex.
+    .4 latex.
+    .5 local.
+}
+\subsection{Music engraver}
+\begin{tabular}{l|l}
+Paketname & \textbf{lilypond} \\ 
+\end{tabular}
+
+\subsection{Musicplayer}
+\begin{tabular}{l|l|l|l}
+~ & Server & Client & Client2 \\ \hline
+    Paketname & \textbf{mpd} & \textbf{ncmpcpp} & \textbf{mpc} \\ 
+    Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}.mpd/mpd.conf} & - & - \\
+\end{tabular}
+\\ \\
+MPD Konfiguration:
+.mpd nach home kopieren
+\begin{lstlisting}[style=Bash]
+$ systemctl --user enable mpd
+$
+\end{lstlisting}
+
+\subsection{PDF-Viewer}
+\begin{tabular}{l|l}
+Paketname & \textbf{evince} \\ 
+\end{tabular}
+
+\subsection{Printer}
+\begin{tabular}{l|l}
+Paketname & \textbf{cups} \\ 
+Besonderheiten & Einrichtung und Verwaltung: http://localhost:631 als root \\
+\end{tabular}
+\\ \\
+Für eine gute Auswahl an hochqualitvativen freien Druckertreibern kann Gutenprint \textbf{gutenprint}
+aus den official repositories installiert werden:
+\begin{lstlisting}[style=Bash]
+# pacman -S gutenprint 
+\end{lstlisting}
+\begin{lstlisting}[style=Bash]
+# systemctl enable org.cups.cupsd 
+\end{lstlisting}
+
+\subsection{Password manager}
+\begin{tabular}{l|l}
+Paketname & \textbf{keepassx} \\ 
+Repository & official repository(community) \\
+Konfigurationsdatei & - \\
+Lizenz & GPL2 \\
+Besonderheiten & - \\
+\end{tabular}
+
+\subsection{Terminal Emulator}
+\begin{tabular}{l|l}
+Paketname & \textbf{rxvt-unicode} \\ 
+Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.Xdefaults} \\
+\end{tabular}
+\\ \\
+Er wird also Daemon gestartet: 
+\begin{lstlisting}[style=Bash]
+# systemctl start urxvtd@username.service
+# systemctl enable  urxvtd@username.service
+\end{lstlisting}
+In der \emph{.bashrc} muss er, der client, nun als Umgebungsvarible definiert werden:
+\begin{lstlisting}[style=Bash]
+$ vim .bashrc 
+
+...
+export TERMINAL=urxvtc
+...
+
+$
+\end{lstlisting}
+
+\subsection{Windowmanager}
+\begin{tabular}{l|l}
+Paketname & \textbf{i3} (Paketgruppe) \\ 
+Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.i3/config} \\
+\end{tabular}
