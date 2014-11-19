@@ -1,54 +1,49 @@
 Alle Pakete befinden sich in den official Repositories und freie Software,
 sofern es nicht explizit vermerkt ist
 
-\subsection{Archivierungsprogramm}
-\begin{tabular}{l|l}
-Paketname & \textbf{tar,unzip} \\ 
-Konfigurationsdatei & - \\
-\end{tabular}
-\\ \\
+\subsection{SSH}
+Pakete: \textbf{openssh} \\
+Konfig und Key verzeichnis: ~.ssh/
+
+\subsection{Monitoring}
+Pakete: \textbf{htop} 
+
+\subsection{Versionskontrolle}
+Pakete: \textbf{git} \\
+Konfiguration: ~.gitconfig
+
+
+\subsection{(De-)Archivierung}
+Pakete: \textbf{tar}, \textbf{unzip} 
 
 \subsection{AUR-Helper}
-\textbf{cower}\footnote{bla} muss aus dem AUR heruntergeladen und selbst gebuildet werden.
+Paket: \textbf{cower}\footnote{AUR} 
 \begin{lstlisting}[style=Bash]
-$ wget https://aur.archlinux.org/packages/co/cower/cower.tar.gz
+$ wget https://aur.archlinux.org/packages 
+  /co/cower/cower.tar.gz
 $ tar -xf cower.tar.gz
 $ cd cower
 $ makepkg
+# pacman -S <dependencies>
 # pacman -U cower-$version-$arch.pkg.tar.xz
-\end{lstlisting}
-Schließlich muss pacaur selbst aus dem AUR heruntergeladen und installiert werden:
-\begin{lstlisting}[style=Bash]
-$ wget https://aur.archlinux.org/packages/pa/pacaur/pacaur.tar.gz
-$ tar -xf pacaur.tar.gz
-$ cd pacaur
-$ makepkg
-# pacamn -S <dependecies>
-# pacman -U pacaur-$version-$arch.pkg.tar.xz
 \end{lstlisting}
 
 \subsection{Backup-tool}
-\begin{tabular}{l|l}
-Paketname & \textbf{rsnapshot} \\ 
-Konfigurationsdatei & /etc/rsnapshot.conf \\
-\end{tabular}
-Es kann eine Datei *.exclude angelegt werden. Der pfad wird in der Konfigurationsdatei spezifiziert
+Paket: \textbf{rsnapshot} \\ 
+Konfigurationsdatei: /etc/rsnapshot.conf \\
+Es kann eine Datei *.exclude angelegt werden.
+Der pfad wird in der Konfigurationsdatei spezifiziert
 
 \subsection{Webbrowser}
-\begin{tabular}{l|l|l}
-Paketname & \textbf{chromium} & \textbf{chromium-pepper-flash} \\ 
-Konfigurationsdatei & - & - \\
-\end{tabular}
-\\
-Folgende plugins sollten installiert werden: adblock, proxflow, ytunblocker
+Pakete: \textbf{chromium}, \textbf{chromium-pepper-flash} \\ 
+Anmeldung mit goolge-Account.
+Dektivieren der Passwortspeicherfunktion.
+Folgende plugins sollten installiert sein:
+adblock, proxflow, ytunblocker
 
-\subsection{cdencode}
-\begin{tabular}{l|l|l}
-Paketname & \textbf{abcde}  \\ 
-Konfigurationsdatei & - & - \\
-\end{tabular}
-\\
-abcde -o flac -Mx
+\subsection{cdencoder}
+Paket: \textbf{abcde}  \\ 
+Usage: abcde -o flac -Mx
 
 \subsection{Texteditor}
 \begin{tabular}{l|l}
