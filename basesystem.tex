@@ -92,9 +92,10 @@ Partitionen mounten:
 # echo KEYMAP=de-latin1 > /etc/vconsole.conf
 # ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 \end{lstlisting}
-Bearbeite /etc/locale.gen
+Uncomment locale in 
+\colorbox{listblue}{\lstinline|/etc/locale.gen|}
 \begin{lstlisting}[style=Bash]
-/etc/locale.gen
+# vi /etc/locale.gen
 !\dotfill!
 de_DE.UTF-8 UTF-8
 de_DE ISO-8859-1
@@ -103,12 +104,12 @@ de_DE@euro ISO-8859-15
 \begin{lstlisting}[style=Bash]
 # locale-gen 
 \end{lstlisting}
-Uncomment multilib in /etc/pacman.conf
+\colorbox{listblue}{\lstinline|/etc/pacman.conf|}
 \begin{lstlisting}[style=Bash]
-...
+# vi /etc/pacman.conf
+!\dotfill!
 [multilib]
 Include = /etc/pacman.d/mirrorlist
-...
 \end{lstlisting}
 Kernel erstellen
 \begin{lstlisting}[style=Bash]

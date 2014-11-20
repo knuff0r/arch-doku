@@ -8,7 +8,8 @@
 \usepackage{hyperref}
 \graphicspath{ {./images/} }
 
-\definecolor{listblue}{rgb}{0.64,0.88,0.99}
+\definecolor{listblue}{rgb}{.922, .945, .961}
+\definecolor{listborder}{rgb}{.788, .851, .894}
 
 \lstdefinestyle{test}
 {
@@ -18,9 +19,9 @@
 {
     language=bash,
     frame=lrtb,
+    rulecolor=\color{listborder},
     basicstyle=\ttfamily,
     showstringspaces=false,
-    keywordstyle=\color{blue},
     escapechar=!,
     backgroundcolor=\color{listblue}
 }
