@@ -63,40 +63,23 @@ Verzeichnisstruktur:
 }
 
 \subsection{E-mail client}
-\begin{tabular}{l|l}
-Paketname & \textbf{thunderbird} \\ 
-Konfigurationsdatei & - \\
-\end{tabular}
+Paket: \textbf{thunderbird}
 
 \subsection{Filemanager}
-\begin{tabular}{l|l}
-Paketname & \textbf{thunar} \\ 
-Konfigurationsdatei & ~ \\
-\end{tabular}
-\\ \\
+Paket: \textbf{thunar} 
 
 \subsection{steam}
-\begin{tabular}{l|l}
-Paketname & \textbf{steam} \\ 
-Lizenz & custom \\
-\end{tabular}
-\\ \\ \\
+Paket: \textbf{steam}\footnote{keine Freie Software} 
 
 \subsection{Bildbetrachter}
-\begin{tabular}{l|l|l}
-Paketname & \textbf{feh} \\ 
-\end{tabular}
+Paket: \textbf{feh}
 
 \subsection{\LaTeX}
-\begin{tabular}{l|l}
-Paketname & \textbf{texlive-core} \\ 
-\end{tabular}
-\\ \\
+Paket: \textbf{texlive-core} \\
 \emph{.sty}-files kommen nach \emph{texmf/tex/latex/local}.
 Mit 
 \begin{lstlisting}[style=Bash, frame=none]
 $ texhash
-$
 \end{lstlisting}
 wird die Latex database aktualisiert.
 \dirtree{%
@@ -107,9 +90,7 @@ wird die Latex database aktualisiert.
     .5 local.
 }
 \subsection{Music engraver}
-\begin{tabular}{l|l}
-Paketname & \textbf{lilypond} \\ 
-\end{tabular}
+Paket: \textbf{lilypond}
 
 \subsection{Musicplayer}
 \begin{tabular}{l|l|l|l}
@@ -118,51 +99,27 @@ Paketname & \textbf{lilypond} \\
     Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}.mpd/mpd.conf} & - & - \\
 \end{tabular}
 \\ \\
-MPD Konfiguration:
-.mpd nach home kopieren
 \begin{lstlisting}[style=Bash]
 $ systemctl --user enable mpd
-$
 \end{lstlisting}
 
 \subsection{PDF-Viewer}
-\begin{tabular}{l|l}
-Paketname & \textbf{evince} \\ 
-\end{tabular}
+Paket: \textbf{evince} 
 
 \subsection{Printer}
-\begin{tabular}{l|l}
-Paketname & \textbf{cups} \\ 
-Besonderheiten & Einrichtung und Verwaltung: http://localhost:631 als root \\
-\end{tabular}
-\\ \\
-Für eine gute Auswahl an hochqualitvativen freien Druckertreibern kann Gutenprint \textbf{gutenprint}
-aus den official repositories installiert werden:
-\begin{lstlisting}[style=Bash]
-# pacman -S gutenprint 
-\end{lstlisting}
+Paket: \textbf{cups}, \textbf{gutenprint}\\
+Einrichtung und Verwaltung: http://localhost:631 als root \\
 \begin{lstlisting}[style=Bash]
 # systemctl enable org.cups.cupsd 
 \end{lstlisting}
 
 \subsection{Password manager}
-\begin{tabular}{l|l}
-Paketname & \textbf{keepassx} \\ 
-Repository & official repository(community) \\
-Konfigurationsdatei & - \\
-Lizenz & GPL2 \\
-Besonderheiten & - \\
-\end{tabular}
+Paket: \textbf{keepassx} \\ 
 
 \subsection{Terminal Emulator}
-\begin{tabular}{l|l}
-Paketname & \textbf{rxvt-unicode} \\ 
-Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.Xdefaults} \\
-\end{tabular}
-\\ \\
-Er wird also Daemon gestartet: 
+Paket: \textbf{rxvt-unicode} \\ 
+Config: {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.Xdefaults} \\
 \begin{lstlisting}[style=Bash]
-# systemctl start urxvtd@username.service
 # systemctl enable  urxvtd@username.service
 \end{lstlisting}
 In der \emph{.bashrc} muss er, der client, nun als Umgebungsvarible definiert werden:
@@ -173,10 +130,8 @@ export TERMINAL=urxvtc
 \end{lstlisting}
 
 \subsection{Windowmanager}
-\begin{tabular}{l|l}
-Paketname & \textbf{i3} (Paketgruppe) \\ 
-Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.i3/config} \\
-\end{tabular}
+Paket: \textbf{i3} (Paketgruppe) \\ 
+Config: {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.i3/config} \\
 
 \subsection{Android - MTP}
 Paket: \textbf{jmptfs} \\ 
@@ -188,9 +143,11 @@ Paket: \textbf{jdk8-openjdk}
 \subsection{hd/ssd benchmarking}
 Paket: \textbf{hdparm}
 Usage:
-\begin{itemize}
-\item{read: \# hdparm -t /dev/sda}
-\end{itemize}
+\begin{lstlisting}[style=Bash]
+# hdparm -t /dev/sda} #read
+$ sync;time bash -c 
+"(dd if=/dev/zero of=bf bs=8k count=500000; sync)" #write
+\end{lstlisting}
 
 
 
