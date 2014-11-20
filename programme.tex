@@ -43,7 +43,10 @@ adblock, proxflow, ytunblocker
 
 \subsection{cdencoder}
 Paket: \textbf{abcde}  \\ 
-Usage: abcde -o flac -Mx
+Usage:
+\begin{lstlisting}[style=Bash]
+$ abcde -o flac -Mx
+\end{lstlisting}
 
 \subsection{Texteditor}
 \begin{tabular}{l|l}
@@ -164,13 +167,9 @@ Er wird also Daemon gestartet:
 \end{lstlisting}
 In der \emph{.bashrc} muss er, der client, nun als Umgebungsvarible definiert werden:
 \begin{lstlisting}[style=Bash]
-$ vim .bashrc 
-
 ...
 export TERMINAL=urxvtc
 ...
-
-$
 \end{lstlisting}
 
 \subsection{Windowmanager}
@@ -178,3 +177,20 @@ $
 Paketname & \textbf{i3} (Paketgruppe) \\ 
 Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.i3/config} \\
 \end{tabular}
+
+\subsection{Android - MTP}
+Paket: \textbf{jmptfs} \\ 
+Usage: jmtpfs /mountpoint  
+
+\subsection{Java}
+Paket: \textbf{jdk8-openjdk}
+
+\subsection{hd/ssd benchmarking}
+Paket: \textbf{hdparm}
+Usage:
+\begin{itemize}
+\item{read: \# hdparm -t /dev/sda}
+\end{itemize}
+
+
+
