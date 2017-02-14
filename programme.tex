@@ -37,9 +37,6 @@ Der pfad wird in der Konfigurationsdatei spezifiziert
 \subsection{Webbrowser}
 Pakete: \textbf{chromium}, \textbf{chromium-pepper-flash} \\ 
 Anmeldung mit goolge-Account.
-Dektivieren der Passwortspeicherfunktion.
-Folgende plugins sollten installiert sein:
-adblock, proxflow, ytunblocker
 
 \subsection{cdencoder}
 Paket: \textbf{abcde}  \\ 
@@ -66,18 +63,21 @@ Verzeichnisstruktur:
 Paket: \textbf{thunderbird}
 
 \subsection{Filemanager}
-Paket: \textbf{thunar} 
+Paket: \textbf{pcmanfm} 
 
 \subsection{steam}
 Paket: \textbf{steam}\footnote{keine Freie Software} 
 
 \subsection{Bildbetrachter}
-Paket: \textbf{feh}
+Paket: \textbf{feh,sxiv}
 
 \subsection{\LaTeX}
 Paket: \textbf{texlive-core} \\
 \emph{.sty}-files kommen nach \emph{texmf/tex/latex/local}.
 Mit 
+\begin{lstlisting}[style=Bash]
+$ grep -l '\\documentclass' *tex | xargs latexmk -pdf -pvc -silent
+\end{lstlisting}
 \begin{lstlisting}[style=Bash]
 $ texhash
 \end{lstlisting}
@@ -92,16 +92,8 @@ wird die Latex database aktualisiert.
 \subsection{Music engraver}
 Paket: \textbf{lilypond}
 
-\subsection{Musicplayer}
-\begin{tabular}{l|l|l|l}
-~ & Server & Client & Client2 \\ \hline
-    Paketname & \textbf{mpd} & \textbf{ncmpcpp} & \textbf{mpc} \\ 
-    Konfigurationsdatei & {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}.mpd/mpd.conf} & - & - \\
-\end{tabular}
-\\ \\
-\begin{lstlisting}[style=Bash]
-$ systemctl --user enable mpd
-\end{lstlisting}
+\subsection{Mpd client}
+Paket: \textbf{ncmpcpp} 
 
 \subsection{PDF-Viewer}
 Paket: \textbf{evince} 
@@ -114,7 +106,8 @@ Einrichtung und Verwaltung: http://localhost:631 als root \\
 \end{lstlisting}
 
 \subsection{Password manager}
-Paket: \textbf{keepassx} \\ 
+Paket: \textbf{pass} \\ 
+Paket: \textbf{rofi-pass}
 
 \subsection{Terminal Emulator}
 Paket: \textbf{rxvt-unicode} \\ 
@@ -136,6 +129,17 @@ Config: {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.i3/config} \\
 \subsection{Android - MTP}
 Paket: \textbf{jmptfs} \\ 
 Usage: jmtpfs /mountpoint  
+
+\subsection{Launcher}
+Paket: \textbf{rofi}
+
+\subsection{Kompositor}
+Paket: \textbf{compton}\\
+Config: {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.compton.conf} 
+
+\subsection{Status Bar}
+Paket: \textbf{polybar} \\
+Config: {{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}/.config/polybar}
 
 \subsection{Java}
 Paket: \textbf{jdk8-openjdk}

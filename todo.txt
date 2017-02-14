@@ -1,13 +1,6 @@
-mpdroid cover art:
----
-sudo chmod o+x /home/sebastian
-ln -s /home/sebastian/Musik/Music /srv/cover
-sudo chown -R /srv/cover/*
-sudo chmod 755 -R Musik/Music/*
-
 mpd
 ---
-mpd conf als davice hw2, format, software mixing
+mpd conf alsa device hw2, format, software mixing
 sudo systemctl start sshd
 
 install
@@ -16,19 +9,24 @@ enscipt
 enscript -r -2 --file-align=2 --highlight --line-numbers -o - `find . -name '*.java'` | ps2pdf - files.pdf
 
 
-cdemu-client
+
 mkvmaker
-icedtea-web
+
 
 edit sudoers NOPASSWD
 
-chromium: chromelpass
-keepasshttp
-
-ssh user@your.host.com cat mediaFile.mp3 | mplayer -
+stream movie ssh: ssh user@your.host.com cat mediaFile.mp3 | mplayer -
 
 hdparm
 
 edit sshd.conf
 
 ssh-keys
+
+polybar
+
+pass
+
+rofi
+
+rofi-pass

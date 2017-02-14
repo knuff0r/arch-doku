@@ -155,26 +155,6 @@ Uncomment wheel group in /etc/sudoers with nopasswd:
 ...
 
 \end{lstlisting}
-Uhrzeit:
-\begin{lstlisting}[style=Bash]
-# pacman -S ntp 
-# vi /etc/ntp.conf
-
-server time.zih.tu-dresden.de
-server de.pool.ntp.org
-
-# systemctl enable ntpd 
-\end{lstlisting}
-Pacman Wundstrasse, TuDresden Mirror in /etc/pacman.d/mirrorlist
-\begin{lstlisting}[style=Bash]
-
-...
-server = ftp://ftp.wh2.tu-dresden.de/pub/mirrors
-/archlinux/$repo/os/x86_64
-...
-
-$
-\end{lstlisting}
 Sound:
 \begin{lstlisting}[style=Bash]
 # pacman -S alsa-utils 
@@ -188,32 +168,21 @@ $
 Installiere Xorg-server, Graphikkartentreiber, Windowmanager und Touchpadtreiber:
 \begin{lstlisting}[style=Bash]
 # pacman -S xorg-server xorg-server-utils xorg-xinit 
-# pacman -S mesa xf86-video-ati lib32-ati-dri
+# pacman -S mesa mesa-libgl lib32-mesa-libgl #multilib
 # pacman -S i3
+\end{lstlisting}
+Für Desktop mit rx480
+\begin{lstlisting}[style=Bash]
+# xf86-video-amd-gpu 
+\end{lstlisting}
+Sonst, für Laptop mit HD5650 und touchpad:
+\begin{lstlisting}[style=Bash]
+# xf86-video-ati lib32-ati-dri
 # pacman -S xf86-input-synaptics
-\end{lstlisting}
-Füge ans Ende der \emph{.xinitrc} i3 als wm ein:
-\begin{lstlisting}[style=Bash]
-$ vi .xinitrc 
 
-...
-xrandr --output LVDS --off --output HDMI-0 --auto
-exec i3
-$
+Kopieren und anpassen von Konfigurationsdateien:
+.xinitrc,.i3/config,.bash_profile(autostartX),.Xdefaults(urxvt,rofi)
 \end{lstlisting}
-Wallpaper: 
-\begin{lstlisting}[style=Bash]
-# pacman -S feh
-# systemctl enable cronie
-$ crontab -e
-...
-*/15 * * * * DISPLAY=:0.0 feh --bg-scale /home/sebastian/Bilder/Wallpaper
-...
-$
-\end{lstlisting}
-Der X-Server wird gestartet
-\begin{lstlisting}[style=Bash]
-$ startx
-...
-$
-\end{lstlisting}
+
+
+
